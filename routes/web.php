@@ -1,7 +1,6 @@
 <?php
 
+use App\Http\Controllers\Table\GeographyController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [GeographyController::class, 'index'])->name('home');
