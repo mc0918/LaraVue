@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Table;
 
+use App\Domains\Country\Country;
+use App\Domains\Country\CountryRepository;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
@@ -44,11 +46,17 @@ class GeographyController extends Controller
             'region',
             'subregion',
             'flag',
+            'coatOfArms'
         ]);
 
         return view('index')->with([
             'data' => $data,
             'fields' => $fields,
         ]);
+    }
+
+    public function store(Collection $countries, CountryRepository $repo)
+    {
+
     }
 }

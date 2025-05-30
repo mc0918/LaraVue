@@ -49,6 +49,9 @@
                 <div v-if="typeof country[field] === 'boolean'">
                     {{ country[field] ? "yes" : "no"}}
                 </div>
+                <div v-else-if="field === 'coatOfArms'">
+                    <img :src="country[field]" alt="coat of arms" style="width: 10vw"/>
+                </div>
                 <div v-else>
                     {{country[field]}}
                 </div>
@@ -62,6 +65,3 @@
 <style scoped>
 
 </style>
-
-<!-- table header w/ API buttons   -->
-<!-- table rows   -->
