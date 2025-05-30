@@ -37,6 +37,11 @@ php artisan migrate:fresh --seed
 php artisan serve
 ```
 
+## Using the App
+The table of countries is served via the root route. The search bar above it filters based on country name.
+
+Clicking the checkboxes to the side of a country selects it to be added to a list via the button above. Once you have created a list, the other button will display a (ugly) list of your lists.
+
 # Testing
 
 ## Running PHP Unit Tests
