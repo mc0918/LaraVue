@@ -23,12 +23,15 @@ These steps do assume you have Node and PHP installed.
 ```shell
 cp .env.example .env
 
+composer install
+
 php artisan key:generate
 
-composer install
+npm i
 
 npm run build
 
+# For ease of testing, I have included the .sqlite file. Normally I would never do this. Laravel even ignores it by default when bootstrapping the app
 php artisan migrate:fresh --seed
 
 php artisan serve
@@ -79,3 +82,7 @@ Vue 3 recommends using Vite but still offers webpack support. Especially with Cy
 I could spend the few hours allotted for this project centering a div and purposefully chose to limit how much time I spent tweaking the front end.
 I think this is apparent as you read down the checklist. As my available time dwindled, I focused on proving the functionality exists rather than making it look aesthetic.
 Unfortunately, this is why we see the raw text appear on screen when viewing favorite lists. 
+
+## User Features
+Nice-to-have's like pruning and naming lists were not reached. Instead, I've used placeholders such as generating a unique name for lists when saving them. 
+In lieu of feature complete, I have added placeholders where I can to show where in the UI these features would go. Modals and nested dropdowns would be next.
