@@ -8,3 +8,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [GeographyController::class, 'index'])->name('home')->withoutMiddleware(VerifyCsrfToken::class);
 Route::get('/favorites', [GeographyController::class, 'getCountryLists'])->name('favorites')->withoutMiddleware(VerifyCsrfToken::class);
 Route::post('/save', [GeographyController::class, 'save'])->name('save')->withoutMiddleware(VerifyCsrfToken::class);
+Route::delete('/delete/{id}', [GeographyController::class, 'deleteCountryList'])->name('delete')->withoutMiddleware(VerifyCsrfToken::class);
