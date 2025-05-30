@@ -24,7 +24,7 @@
     <div id="app">
         <div class="container text-center">
             {{-- close tags for browser compatability --}}
-            <datatable></datatable>
+            <datatable :countries='@json($data)' :fields='@json($fields)'></datatable>
         </div>
     </div>
     </body>
