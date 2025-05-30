@@ -94,16 +94,13 @@ class GeographyController extends Controller
         return CountryList::with('countries')->get();
     }
 
-    public function deleteCountryList(int $id): \Illuminate\Http\JsonResponse
+    public function deleteCountryList(int $id, CountryListRepository $repo): \Illuminate\Http\JsonResponse
     {
 
         //@TODO: this is a bad hack after realizing the two should have a many-to-many relationship through a pivot table
         //     it works because duplicate countries can be saved in the DB per list
-        $countryList = CountryList::find($id);
-        $countryList->countries()->where('country_list_id', '=', $id)->get()->each->delete();
+        $repo->delete($id);
 
-        $delRows = $countryList->delete();
-
-        return response()->json(['rows' => $delRows]);
+        return response()->json(['success' => true]);
     }
 }

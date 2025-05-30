@@ -22,4 +22,14 @@ class CountryListRepository
             return $countryList->fresh();
         });
     }
+
+    public function delete(int $id): void
+    {
+        DB::transaction(function () use ($id) {
+            $countryList = CountryList::find($id);
+            $countryList->countries()->where('country_list_id', '=', $id)->get()->each->delete();
+
+            $countryList->delete();
+        });
+    }
 }

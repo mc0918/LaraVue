@@ -13,13 +13,14 @@ export default defineConfig({
     setupNodeEvents(on) {
       on("file:preprocessor", vitePreprocessor());
     },
-    baseUrl: "http://localhost",
+    baseUrl: "http://localhost:8000",
     specPattern: "tests/cypress/integration/**/*.cy.{js,jsx,ts,tsx}",
     supportFile: "tests/cypress/support/index.js",
   },
 
   component: {
-    devServer: {
+      video:false,
+      devServer: {
       framework: "vue",
       bundler: "vite",
     },

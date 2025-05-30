@@ -36,7 +36,14 @@
             </favorite-list>
         </div>
         <div class=" col-7">
-            <input type="search" class="form-control" v-model="query" @input="debouncedSearch" placeholder="Search by Country Name">
+            <input
+                type="search"
+                class="form-control"
+                v-model="query"
+                @input="debouncedSearch"
+                placeholder="Search by Country Name"
+                data-cy="country-search"
+            >
         </div>
     </div>
     <table id="tableComponent" class="table table-bordered table-striped">
