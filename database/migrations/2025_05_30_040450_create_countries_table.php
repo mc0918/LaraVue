@@ -14,14 +14,18 @@ return new class extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->unsignedInteger('country_list_id');
+            $table->foreign('country_list_id')->references('id')->on('country_lists');
 
             $table->string('name');
             $table->string('capital');
+            $table->string('languages');
             $table->boolean('landlocked');
             $table->integer('population');
             $table->string('region');
             $table->string('subregion');
-            $table->string('flag');
+            $table->string('flag')->nullable();
+            $table->string('coatOfArms')->nullable();
         });
     }
 
@@ -30,6 +34,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('countries');
+        // Commented out for idempotent migrations
+//        Schema::dropIfExists('countries');
     }
 };

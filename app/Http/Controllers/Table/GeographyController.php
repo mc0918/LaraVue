@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Table;
 
 use App\Domains\Country\Country;
-use App\Domains\Country\CountryRepository;
+use App\Domains\CountryList\CountryList;
+use App\Domains\CountryList\CountryListRepository;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
-use Ramsey\Collection\Collection;
 
 class GeographyController extends Controller
 {
@@ -55,8 +56,41 @@ class GeographyController extends Controller
         ]);
     }
 
-    public function store(Collection $countries, CountryRepository $repo)
+    public function save(Request $request, CountryListRepository $repo)
     {
+        $data = $request->request->all();
 
+        $countries = collect();
+        foreach ($data as $country) {
+            $countryObject = new Country([
+                'name' => $country['name'],
+                'capital' => $country['capital'],
+                'languages' => $country['languages'],
+                'landlocked' => $country['landlocked'],
+                'population' => $country['population'],
+                'region' => $country['region'],
+                'subregion' => $country['subregion'],
+                'flag' => $country['flag'],
+                'coatOfArms' => $country['coatOfArms'],
+            ]);
+
+            $countries->add($countryObject);
+        }
+
+        $countryList = new CountryList([
+            'name' => uniqid() //@TODO: take user input
+        ]);
+
+        $countryList = $repo->save($countryList, $countries);
+
+        return response()->json([
+            'success' => true,
+            'countryList' => $countryList
+        ]);
+    }
+
+    public function getCountryLists()
+    {
+        return CountryList::all();
     }
 }

@@ -10,6 +10,7 @@
         data() {
             return {
                 query: '',
+                checkedCountries: []
             };
         },
         methods: {
@@ -29,8 +30,12 @@
 </script>
 
 <template>
-    <div class="searchBar">
-        <div class="input-group">
+    <div class="searchBar row">
+        <div class="col-5">
+            <favorite-list :checkedCountries="checkedCountries">
+            </favorite-list>
+        </div>
+        <div class=" col-7">
             <input type="search" class="form-control" v-model="query" @input="debouncedSearch" placeholder="Search by Country Name">
         </div>
     </div>
@@ -45,7 +50,9 @@
         </thead>
         <tbody>
         <tr v-for="country in filterCountries()" :key="country.name">
-            <td>checkbox</td>
+            <td>
+                <input type="checkbox" v-model="checkedCountries" :value="country"/>
+            </td>
             <td v-for="field in fields">
                 <div v-if="typeof country[field] === 'boolean'">
                     {{ country[field] ? "yes" : "no"}}
@@ -64,5 +71,7 @@
 </template>
 
 <style scoped>
-
+    input[type="checkbox"] {
+        transform:scale(1.2, 1.2);
+    }
 </style>
