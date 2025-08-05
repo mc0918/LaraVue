@@ -9,3 +9,4 @@ Route::get('/', [GeographyController::class, 'index'])->name('home')->withoutMid
 Route::get('/favorites', [GeographyController::class, 'getCountryLists'])->name('favorites')->withoutMiddleware(VerifyCsrfToken::class);
 Route::post('/save', [GeographyController::class, 'save'])->name('save')->withoutMiddleware(VerifyCsrfToken::class);
 Route::delete('/delete/{id}', [GeographyController::class, 'deleteCountryList'])->name('delete')->withoutMiddleware(VerifyCsrfToken::class);
+Route::delete('/delete/{listId}/country/{countryId}', [GeographyController::class, 'deleteCountryFromList'])->name('deleteCountry')->withoutMiddleware(VerifyCsrfToken::class);

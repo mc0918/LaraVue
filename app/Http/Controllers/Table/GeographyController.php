@@ -13,7 +13,18 @@ use Illuminate\View\View;
 
 class GeographyController extends Controller
 {
-    private const ALL_RESULTS = '/all';
+    // The API returns a lot of data, pick the more interesting bits to display
+    private const FIELDS = [
+        'name',
+        'capital',
+        'languages',
+        'landlocked',
+        'population',
+        'region',
+        'subregion',
+        'flag',
+        'coatOfArms'
+    ];
 
     public function __construct()
     {
@@ -22,7 +33,8 @@ class GeographyController extends Controller
 
     public function index(): View
     {
-        $data = Http::get(config('api.api_url') . self::ALL_RESULTS)->json();
+        $fieldsQuery = '/all?fields=' . implode(',', self::FIELDS);
+        $data = Http::get(config('api.api_url') . $fieldsQuery)->json();
 
         /** @var Collection $data */
         $data = collect($data)
@@ -37,22 +49,9 @@ class GeographyController extends Controller
                 return $country;
             });
 
-        // The API returns a lot of data, pick the more interesting bits to display
-        $fields = collect([
-            'name',
-            'capital',
-            'languages',
-            'landlocked',
-            'population',
-            'region',
-            'subregion',
-            'flag',
-            'coatOfArms'
-        ]);
-
         return view('index')->with([
             'data' => $data,
-            'fields' => $fields,
+            'fields' => self::FIELDS,
         ]);
     }
 
@@ -102,5 +101,14 @@ class GeographyController extends Controller
         $repo->delete($id);
 
         return response()->json(['success' => true]);
+    }
+
+    public function deleteCountryFromList(int $listId, int $countryId, CountryListRepository $repo): \Illuminate\Http\JsonResponse
+    {
+        $repo->deleteCountry($listId, $countryId);
+
+        return response()->json([
+            'success' => true,
+        ]);
     }
 }

@@ -32,4 +32,16 @@ class CountryListRepository
             $countryList->delete();
         });
     }
+
+    public function deleteCountry(int $listId, int $countryId): void
+    {
+        DB::transaction(function () use ($listId, $countryId) {
+            $countryList = CountryList::find($listId);
+            $countryList->countries()->where('id', '=', $countryId)->first()->delete();
+
+            if ($countryList->countries()->count() < 1) {
+                $countryList->delete();
+            }
+        });
+    }
 }

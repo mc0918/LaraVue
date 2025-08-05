@@ -89,5 +89,5 @@ I think this is apparent as you read down the checklist. As my available time dw
 Unfortunately, this is why we see the raw text appear on screen when viewing favorite lists. 
 
 ## User Features
-Nice-to-have's like pruning and naming lists were not reached. Instead, I've used placeholders such as generating a unique name for lists when saving them. 
+Nice-to-have's like naming lists was not reached. Instead, I've used placeholders such as generating a unique name for lists when saving them. 
 In lieu of feature complete, I have added placeholders where I can to show where in the UI these features would go. Modals and nested dropdowns would be next.
